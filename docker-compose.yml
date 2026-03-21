@@ -1,0 +1,18 @@
+services:
+  node:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./node:/app
+    env_file:
+      - .env
+    command: sh -c "npm install && node index.js"
+
+  python:
+    image: python:3.11
+    working_dir: /app
+    volumes:
+      - ./python:/app
+    env_file:
+      - .env
+    command: sh -c "pip install -r requirements.txt && python app.py"

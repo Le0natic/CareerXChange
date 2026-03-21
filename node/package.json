@@ -1,0 +1,17 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "SWE5008 Team 18",
+  "license": "ISC",
+  "description": "CareerXChange Node.js backend for OpenAI API integration",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "openai": "^6.32.0"
+  }
+}
