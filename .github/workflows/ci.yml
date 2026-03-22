@@ -166,7 +166,7 @@ jobs:
         run: docker build -t node-app ./node
 
       - name: Scan Node Docker image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: node-app
           format: table
@@ -177,7 +177,7 @@ jobs:
         run: docker build -t python-app ./python
 
       - name: Scan Python Docker image
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: python-app
           format: table
