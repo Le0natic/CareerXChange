@@ -1,0 +1,116 @@
+name: Security & Dependency Scan for Docker Services
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  codeql-security:
+    name: 🔐 CodeQL Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, python
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Run CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  dependency-check:
+    name: 📦 Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    needs: codeql-security
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js dependencies
+        run: |
+          cd node
+          npm install
+
+      - name: Run npm audit
+        run: |
+          cd node
+          npm audit --json > npm-audit-report.json || true
+
+      - name: Upload npm audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: node/npm-audit-report.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          cd python
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pip-audit
+
+      - name: Run pip-audit
+        run: |
+          cd python
+          pip-audit -f json -o pip-audit-report.json || true
+
+      - name: Upload pip audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pip-audit-report
+          path: python/pip-audit-report.json
+
+  docker-scan:
+    name: 🐳 Docker Image Security Scan
+    runs-on: ubuntu-latest
+    needs: dependency-check
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Node.js Docker image
+        run: docker build -t node-app ./node
+
+      - name: Scan Node.js Docker image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: node-app
+          format: table
+          exit-code: '1'
+          severity: HIGH,CRITICAL
+
+      - name: Build Python Docker image
+        run: docker build -t python-app ./python
+
+      - name: Scan Python Docker image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: python-app
+          format: table
+          exit-code: '1'
+          severity: HIGH,CRITICAL
