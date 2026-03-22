@@ -1,18 +1,18 @@
 services:
   node:
-    image: node:20
-    working_dir: /app
-    volumes:
-      - ./node:/app
+    build:
+      context: ./node
+    container_name: node-app
+    ports:
+      - "3000:3000"
     env_file:
       - .env
-    command: sh -c "npm install && node index.js"
 
   python:
-    image: python:3.11
-    working_dir: /app
-    volumes:
-      - ./python:/app
+    build:
+      context: ./python
+    container_name: python-app
+    ports:
+      - "8000:8000"
     env_file:
       - .env
-    command: sh -c "pip install -r requirements.txt && python app.py"
