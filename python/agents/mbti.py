@@ -16,7 +16,7 @@ class MBTIAgent(Agent):
     def run_interactive(self, initial_output, question_count = 20):
         context = initial_output
         answers = []
-        count = 1;
+        count = 1
 
         # Step 1: Generate questions.
         questions = self.generate_questions(context, question_count)
@@ -37,7 +37,7 @@ class MBTIAgent(Agent):
                     "answer": user_answer
                 })
                 print(f"\n[{self.name}] Record added successfully. To the next question...")
-            if count > 20:
+            if count > question_count:
                 print(f"\n[{self.name}] No more question left. Concluding...")
                 break
         
@@ -73,11 +73,11 @@ class MBTIAgent(Agent):
         }}
 
         Important Note While Returning JSON:
-        1. Return ONLY valid JSON (no single quotes, strictly double quotes for keys and values).
+        1. Return ONLY valid JSON, and must be constructed with double-quotes; Double quotes within strings must be escaped with a backslash.
         2. No explanation.
         3. Follow schema strictly.
         """
-        raw = call_llm(self.system_prompt, prompt)
+        raw = call_llm(self.system_prompt, prompt, "json_object")
         data = json.loads(raw)
         return data["questions"]
     
@@ -106,11 +106,11 @@ class MBTIAgent(Agent):
         }}
 
         Important Note While Returning JSON:
-        1. Return ONLY valid JSON (no single quotes, strictly double quotes for keys and values).
+        1. Return ONLY valid JSON, and must be constructed with double-quotes; Double quotes within strings must be escaped with a backslash.
         2. No explanation.
         3. Follow schema strictly.
         """
-        raw = call_llm(self.system_prompt, prompt)
+        raw = call_llm(self.system_prompt, prompt, "json_object")
         parsed = json.loads(raw)
         self._validate(parsed)
         return parsed
