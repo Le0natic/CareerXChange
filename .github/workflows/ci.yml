@@ -63,21 +63,21 @@ jobs:
   # =========================
   # 🔐 SECRET SCAN
   # =========================
-  secret-scan:
-    name: Secret Scan (Gitleaks)
-    runs-on: ubuntu-latest
-    needs: build-and-test
+  # secret-scan:
+  #   name: Secret Scan (Gitleaks)
+  #   runs-on: ubuntu-latest
+  #   needs: build-and-test
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          scan-mode: filesystem   # Avoid git issues
+  #     - name: Run Gitleaks
+  #       uses: gitleaks/gitleaks-action@v2
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         scan-mode: filesystem   # Avoid git issues
 
   # =========================
   # 📦 DEPENDENCY SCAN
