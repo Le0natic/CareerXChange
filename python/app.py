@@ -6,7 +6,7 @@ import json
 mbti_agent = MBTIAgent()
 
 # Step 2: Run the MBTI agent.
-result = mbti_agent.run_interactive(None, 10)
+result = mbti_agent.run_interactive(None)
 
 # Step 3: Print MBTI result.
 print("\nFinal MBTI Result:")
