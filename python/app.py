@@ -1,14 +1,11 @@
-import os
-from openai import OpenAI
-from dotenv import load_dotenv
+from agents.mbti import MBTIAgent
 
-load_dotenv()
+# Step 1: Initiate MBTI Agent.
+agent = MBTIAgent()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Step 2: Run the MBTI Agent.
+result = agent.run_interactive(None)
 
-response = client.responses.create(
-    model="gpt-4.1-mini",
-    input="Explain microservices vs monolith briefly."
-)
-
-print(response.output[0].content[0].text)
+# Step 3: Print MBTI result.
+print("\nFinal MBTI Result:")
+print(result if result is not None else "Cannot determine final result.")
