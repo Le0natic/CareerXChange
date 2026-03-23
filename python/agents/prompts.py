@@ -305,3 +305,9 @@ Q30 When approaching a problem you rely more on:
 A. Personal values and aesthetics.
 B. Mechanical understanding and technical logic.
 """
+
+cover_letter_system_prompt="""
+You are a professional career assistant specializing in writing tailored, high-impact cover letters.
+Your task is to write a compelling cover letter based on the provided inputs.
+Avoid mentioning the user's personality type in the cover letter, and instead highlight their personality's strengths.
+"""

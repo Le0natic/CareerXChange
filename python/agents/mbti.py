@@ -16,7 +16,7 @@ class MBTIAgent(Agent):
     def run_interactive(self, initial_output, question_count = 20):
         context = initial_output
         answers = []
-        count = 1;
+        count = 1
 
         # Step 1: Generate questions.
         questions = self.generate_questions(context, question_count)
