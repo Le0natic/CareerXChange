@@ -1,0 +1,188 @@
+Requesting 20 questions from MBTI Agent...
+
+[MBTI Agent] Got it! Please answer the following 20 questions.
+
+[MBTI Agent] 1. After a busy week, which feels more refreshing?
+A. Spending quiet time alone or with one close person.
+B. Going out, meeting people, or doing something social.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 2. When learning something new, which helps you more?
+A. Concrete examples and step-by-step explanations.
+B. Big-picture concepts and underlying principles.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 3. When making an important decision, you prioritize:
+A. Logical consistency and objective analysis.
+B. Values and the impact on people.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 4. When planning a trip you prefer to:
+A. Organize the itinerary beforehand.
+B. Decide activities spontaneously.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 5. When thinking about the future, do you:
+A. Focus on one clear vision that feels likely (Ni).
+B. Generate many different possibilities (Ne).
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 6. When analyzing something you prefer:
+A. Understanding how the logic works internally (Ti).
+B. Making the system efficient and productive (Te).
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 7. When your values are challenged you:
+A. Try to guide others toward a shared vision.
+B. Reflect internally and stay authentic to yourself.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 8. When exploring ideas you focus more on:
+A. Meaning and personal values.
+B. Logical possibilities and debate.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 9. When starting a project you prefer to:
+A. Define the plan and milestones first.
+B. Experiment and figure things out along the way.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 10. After several hours of social interaction you usually feel:
+A. Mentally drained and needing alone time.
+B. Energized or stimulated.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 11. When approaching a new idea, you tend to:
+A. Ask "How does this work in practice?"
+B. Ask "What could this lead to?"
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 12. In disagreements, you focus first on:
+A. What is logically correct.
+B. What will maintain understanding between people.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 13. When your workspace or schedule is usually:
+A. Organized and structured.
+B. Flexible and adaptable.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 14. When brainstorming ideas you prefer:
+A. Developing one idea deeply.
+B. Exploring many ideas rapidly.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 15. When giving feedback, your instinct is to:
+A. Be direct and precise about what needs improvement.
+B. Phrase things carefully to protect the other person's feelings.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 16. When deadlines affect you:
+A. I prefer finishing tasks early and having closure.
+B. I often work best when the deadline approaches.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 17. When rules conflict with someone's situation you prioritize:
+A. Maintaining the integrity of the rules.
+B. Protecting the people affected.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 18. When reading a story or watching a film, you focus more on:
+A. The events and realistic details.
+B. Themes, symbolism, or hidden meanings.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 19. When starting a project you prefer to:
+A. Define the plan and milestones first.
+B. Experiment and figure things out along the way.
+Your answer (A or B): a
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] 20. Do you prefer:
+A. Designing structured long-term strategies.
+B. Exploring theories without needing a final plan.
+Your answer (A or B): b
+
+[MBTI Agent] Valid answer! Adding answered to questionnaire...
+
+[MBTI Agent] Record added successfully. To the next question...
+
+[MBTI Agent] No more question left. Concluding...
+
+Final MBTI Result:
+{'mbti': 'INFJ', 'personality_type': 'Advocate', 'confidence': 0.85, 'traits': ['I', 'N', 'F', 'J']}
