@@ -25,18 +25,19 @@ class MBTIAgent(Agent):
 
         for qs in questions:
             print(f"\n[{self.name}] {count}. {qs}")
-            user_answer = input("Your answer (A or B): ").strip().upper()
+            while True:
+                user_answer = input("Your answer (A or B): ").strip().upper()
+                if user_answer not in {"A", "B"}:
+                    print(f"\n[{self.name}] Please provide answer only in A or B. Please answer again...")
+                else:
+                    print(f"\n[{self.name}] Valid answer! Adding answer to questionnaire...")
+                    answers.append({
+                        "question": qs,
+                        "answer": user_answer
+                    })
+                    print(f"\n[{self.name}] Record added successfully. To the next question...")
+                    break
             count += 1
-            if user_answer not in {"A", "B"}:
-                print(f"\n[{self.name}] Please provide answer only in A or B. Skipping to the next question...")
-                continue
-            else:
-                print(f"\n[{self.name}] Valid answer! Adding answered to questionnaire...")
-                answers.append({
-                    "question": qs,
-                    "answer": user_answer
-                })
-                print(f"\n[{self.name}] Record added successfully. To the next question...")
             if count > question_count:
                 print(f"\n[{self.name}] No more question left. Concluding...")
                 break
