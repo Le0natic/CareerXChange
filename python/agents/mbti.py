@@ -24,28 +24,39 @@ class MBTIAgent(Agent):
         print(f"\n[{self.name}] Got it! Please answer the following {len(questions)} questions.")
 
         for qs in questions:
-            print(f"\n[{self.name}] {count}. {qs}")
-            user_answer = input("Your answer (A or B): ").strip().upper()
+            while True:  # Loop until valid answer is provided
+                print(f"\n[{self.name}] {count}. {qs}")
+                user_answer = input("Your answer (A or B): ").strip().upper()
+
+                if user_answer not in {"A", "B"}:
+                    print(f"\n[{self.name}] Invalid input. Please answer only with A or B. Let's try again...")
+                    continue  # Ask the same question again
+                else:
+                    print(f"\n[{self.name}] Valid answer! Recording your answer...")
+                    answers.append({
+                        "question": qs,
+                        "answer": user_answer
+                    })
+                    print(f"\n[{self.name}] Answer recorded. Moving to next question...")
+                    break  # Move to the next question
+
             count += 1
-            if user_answer not in {"A", "B"}:
-                print(f"\n[{self.name}] Please provide answer only in A or B. Skipping to the next question...")
-                continue
-            else:
-                print(f"\n[{self.name}] Valid answer! Adding answered to questionnaire...")
-                answers.append({
-                    "question": qs,
-                    "answer": user_answer
-                })
-                print(f"\n[{self.name}] Record added successfully. To the next question...")
             if count > question_count:
-                print(f"\n[{self.name}] No more question left. Concluding...")
+                print(f"\n[{self.name}] No more questions left. Concluding...")
                 break
         
         # Step 2: Final classification.
         if len(answers) == len(questions):
             return self.finalize_questionnaire(context, answers)
-        
-        return print(f"\n[{self.name}] ({len(answers)} out of {len(questions)} valid answers)\nInsufficient questions answered to form a final decision.")
+        else:
+            # Return a standard dict instead of print
+            return {
+                "mbti": None,
+                "personality_type": None,
+                "confidence": 0,
+                "traits": [],
+                "message": f"Only {len(answers)} out of {len(questions)} questions answered. Cannot determine MBTI type."
+            }
 
     # Step 2: Ask questions.
     def generate_questions(self, context, question_count):
@@ -60,9 +71,10 @@ class MBTIAgent(Agent):
         Important Note While Asking Questions:
         1. Only ask the questions provided, word-by-word: Do not deviate from these questions.
         2. Do not repeat questions already asked.
-        3. Do not show any hint or information regarding what the question is asking about. E.g.: providing context of 'Si/Se' in the questions prompted to the user.
-        4. There must be 2 choices (labelled with A and B arranged vertically) for each question.
-        5. Must cover at least ONE question from each of 3 categories.
+        3. Do not show any hint or information regarding what the question is asking about. This is to not lead the user to answer a certain way if they already know their MBTI. 
+        4. Do not provide any information of 'Si/Se' or 'Ni/Ne' or 'Fi/Fe' or 'Ti/Te' in the questions prompted to the user.
+        5. There must be 2 choices (labelled with A and B arranged vertically) for each question.
+        6. Must cover at least ONE question from each of 3 categories.
 
         Return JSON in following format:
         {{
@@ -99,18 +111,21 @@ class MBTIAgent(Agent):
           "confidence": 0-1,
           "traits": [
             "...",
-            "...",
-            "...",
             "..."
           ]
         }}
+
+        End off with:
+        Handing off to Skills Agent for skills identifying.
 
         Important Note While Returning JSON:
         1. Return ONLY valid JSON, and must be constructed with double-quotes; Double quotes within strings must be escaped with a backslash.
         2. No explanation.
         3. Follow schema strictly.
+        4. In the traits, provide a brief description of the personality_type with two key points
         """
         raw = call_llm(self.system_prompt, prompt, "json_object")
         parsed = json.loads(raw)
         self._validate(parsed)
         return parsed
+        

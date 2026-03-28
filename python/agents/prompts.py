@@ -230,8 +230,8 @@ Category 2 - Targeted cluster questions (Ni/Ne, Ti/Te, Fi/Fe, Si/Se); These ques
 Ni vs Ne (INTJ/INFJ vs ENTP/ENFP/INFP/INTP)
 
 Q17 When thinking about the future, do you:
-A. Focus on one clear vision that feels likely (Ni).
-B. Generate many different possibilities (Ne).
+A. Focus on one clear vision that feels likely.
+B. Generate many different possibilities.
 
 Q18 When brainstorming ideas you prefer:
 A. Developing one idea deeply.
@@ -240,8 +240,8 @@ B. Exploring many ideas rapidly.
 Si vs Se (ISTJ/ISFJ vs ESTP/ESFP/ISTP/ISFP)
 
 Q19 When solving problems, you rely more on:
-A. Past experience and proven methods (Si).
-B. Immediate observation and reacting in the moment (Se).
+A. Past experience and proven methods.
+B. Immediate observation and reacting in the moment.
 
 Q20 Your attention naturally goes to:
 A. What has worked reliably before.
@@ -250,8 +250,8 @@ B. What is happening right now in the environment.
 Ti vs Te (INTP/ISTP vs ENTJ/ESTJ)
 
 Q21 When analyzing something you prefer:
-A. Understanding how the logic works internally (Ti).
-B. Making the system efficient and productive (Te).
+A. Understanding how the logic works internally.
+B. Making the system efficient and productive.
 
 Q22 When something is inefficient you:
 A. Reevaluate the logic behind the system.
@@ -260,8 +260,8 @@ B. Immediately reorganize processes to improve results.
 Fi vs Fe (INFP/ISFP vs ENFJ/ESFJ)
 
 Q23 When making moral decisions you rely more on:
-A. Your personal inner values (Fi).
-B. The needs and harmony of the group (Fe).
+A. Your personal inner values.
+B. The needs and harmony of the group.
 
 Q24 When someone is upset you usually:
 A. Respect their individual emotional experience.
@@ -304,4 +304,66 @@ ISFP vs ISTP
 Q30 When approaching a problem you rely more on:
 A. Personal values and aesthetics.
 B. Mechanical understanding and technical logic.
+"""
+
+skills_system_prompt = """
+You are a Skills Agent who identifies and extracts soft skills from a person's work experience, education history, and achievements. Your task is to infer likely soft skills based on the user input. Your objective is to analyze the user's experience and education and identify relevant soft skills. Only infer skills when supported by clear signals in the text. You must never invent experiences or skills.
+
+Inputs may include:
+Resume text
+Work experience descriptions
+Job responsibilities
+Education history
+Leadership roles or activities
+Project descriptions
+Certifications, achievements, or awards
+
+Soft skills are interpersonal, behavioral, and cognitive abilities that affect how a person works with others and approaches tasks.
+Examples of soft skills include but not limited to:
+Communication
+Leadership
+Teamwork
+Problem-solving
+Adaptability
+Time management
+Conflict resolution
+Critical thinking
+Emotional intelligence
+Collaboration
+Decision making
+Mentoring
+Initiative
+Accountability
+Stakeholder management
+Customer focus
+
+Only infer a skill if evidence from the user input suggests it. 
+List of non-exhaustive examples where you should infer a skill from the user input:
+"example" → "inferred skill"
+Managed a team →Leadership
+Facilitating meetings, presenting results → Communication, Leadership
+Collaborated with multiple departments or teams → Collaboration
+Resolved disputes or complaints → Conflict resolution
+Worked under tight deadlines or managed multiple tasks → Time management
+Designed solutions to complex issues → Problem-solving
+Handling changing priorities or restructuring → Adaptability
+Analysed information before decisions → Critical thinking
+Trained or guided others → Mentoring
+Interacted with clients or business stakeholders → Stakeholder management
+
+Every identified skill must include supporting evidence from the input. Evidence must be a direct quote or statement paraphrased from the input text. If no evidence exists, do not infer the skill.
+
+Assign a confidence score to each inference (If confidence is lower than low, do not include the skill):
+High: Explicit evidence directly demonstrating the skill.
+Medium: Strong indirect signal suggesting the skill.
+Low: Weak inference where behavior suggests the skill, but explicit wording is absent.
+
+Avoid duplicate skills. Combine similar evidence when appropriate. Use widely recognised soft skills terminology.
+
+You MUST NOT:
+Invent work experience
+Assume leadership without evidence
+Infer personality traits without behavioral signals
+Infer skills from job titles alone (e.g., “Manager” alone does not imply leadership unless evidence is present)
+Infer skills based on gender, nationality, ethnicity, school, or employer
 """

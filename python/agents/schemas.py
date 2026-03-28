@@ -4,3 +4,8 @@ mbti_schema = {
     "confidence": float,
     "traits": list
 }
+skills_schema = {
+    "skill": str,
+    "confidence": float,
+    "evidence": list
+}
