@@ -64,6 +64,16 @@ class SkillsAgent(Agent):
 
         print(f"\n[{self.name}] {len(education)} education record(s) recorded. Processing all inputs...")
 
+        #Resume
+        resume_text = input(f"\n[{self.name}] Do you have an existing resume you want to provide for our analysis? (Press Enter to skip): ").strip()
+        if resume_text:
+            print(f"\n[{self.name}] Resume detected. Extracting additional information...")
+            resume_data = self.process_resume(resume_text)
+            experiences.extend(resume_data.get("experiences", []))
+            education.extend(resume_data.get("education", []))
+        else:
+            print(f"\n[{self.name}] No resume provided. Proceeding with current data...")
+
         return self.process_profile(context, experiences, education)
      
         
@@ -121,3 +131,35 @@ If there is insufficient information, return:
         if "identified_soft_skills" in result_json:
             result_json["identified_soft_skills"] = result_json["identified_soft_skills"][:12]
         return result_json
+    
+    def process_resume(self, resume_text):
+            """
+            Process resume to extract key experiences and education points.
+            Returns a dictionary with 'experiences' and 'education'.
+            """
+            prompt = f"""
+System Prompt:
+{skills_system_prompt}
+
+User Input:
+Here is a resume text:
+{resume_text}
+
+Instructions:
+1. Extract the main work experiences (projects, job roles, responsibilities) in bullet form.
+2. Extract education history (degrees, institutions, certifications) in bullet form.
+3. Extract inferred skills with evidence provided in bullet form.
+4. Return JSON with keys:
+{{
+    "experiences": [ "...", "..."],
+    "education": [ "...", "..."],
+    "inferred skills":[ "...", "..."]
+}}
+5. Only include relevant items. Avoid explanations.
+"""
+            result_str = call_llm(skills_system_prompt, prompt, "text")
+            try:
+                result_json = json.loads(result_str)
+            except json.JSONDecodeError:
+                result_json = {"experiences": [], "education": []}
+            return result_json
