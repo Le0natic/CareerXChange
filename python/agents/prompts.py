@@ -230,8 +230,8 @@ Category 2 - Targeted cluster questions (Ni/Ne, Ti/Te, Fi/Fe, Si/Se); These ques
 Ni vs Ne (INTJ/INFJ vs ENTP/ENFP/INFP/INTP)
 
 Q17 When thinking about the future, do you:
-A. Focus on one clear vision that feels likely (Ni).
-B. Generate many different possibilities (Ne).
+A. Focus on one clear vision that feels likely.
+B. Generate many different possibilities.
 
 Q18 When brainstorming ideas you prefer:
 A. Developing one idea deeply.
@@ -240,8 +240,8 @@ B. Exploring many ideas rapidly.
 Si vs Se (ISTJ/ISFJ vs ESTP/ESFP/ISTP/ISFP)
 
 Q19 When solving problems, you rely more on:
-A. Past experience and proven methods (Si).
-B. Immediate observation and reacting in the moment (Se).
+A. Past experience and proven methods.
+B. Immediate observation and reacting in the moment.
 
 Q20 Your attention naturally goes to:
 A. What has worked reliably before.
@@ -250,8 +250,8 @@ B. What is happening right now in the environment.
 Ti vs Te (INTP/ISTP vs ENTJ/ESTJ)
 
 Q21 When analyzing something you prefer:
-A. Understanding how the logic works internally (Ti).
-B. Making the system efficient and productive (Te).
+A. Understanding how the logic works internally.
+B. Making the system efficient and productive.
 
 Q22 When something is inefficient you:
 A. Reevaluate the logic behind the system.
@@ -260,8 +260,8 @@ B. Immediately reorganize processes to improve results.
 Fi vs Fe (INFP/ISFP vs ENFJ/ESFJ)
 
 Q23 When making moral decisions you rely more on:
-A. Your personal inner values (Fi).
-B. The needs and harmony of the group (Fe).
+A. Your personal inner values.
+B. The needs and harmony of the group.
 
 Q24 When someone is upset you usually:
 A. Respect their individual emotional experience.
