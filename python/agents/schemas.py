@@ -5,9 +5,6 @@ mbti_schema = {
     "traits": list
 }
 cover_letter_schema = {
-    "company": str,
-    "job_title": str,
-    "candidate_name": str,
     "cover_letter": str
 }
 skills_schema = {
@@ -21,4 +18,13 @@ coach_schema = {
     "strengths_identified": list,
     "development_areas": list,
     "additional_guidance": str
+}
+resume_schema = {
+    "header": object,
+    "professional_summary": str,
+    "skills": str,
+    "work_experience": list,
+    "projects": str,
+    "education": list,
+    "additional_sections": object
 }

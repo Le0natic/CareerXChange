@@ -1,6 +1,8 @@
 from agents.mbti import MBTIAgent
 from agents.skills import SkillsAgent
 from agents.coach import CoachAgent
+from agents.cover_letter import CoverLetterAgent
+from agents.resume import ResumeAgent
 import re
 import json
 
@@ -8,6 +10,8 @@ import json
 mbti_agent = MBTIAgent()
 skills_agent = SkillsAgent()
 coach_agent = CoachAgent()
+cover_letter_agent = CoverLetterAgent()
+resume_agent = ResumeAgent()
 
 # Step 2: Run the MBTI agent.
 mbti_result = mbti_agent.run_interactive(None)
@@ -53,3 +57,24 @@ print(json.dumps(coach_result, ensure_ascii=False, indent=2))
 #    print(cleaned_coaching)
 #else:
 #    print("Cannot determine coaching result.")
+
+# Step 7: Run Resume Agent.
+resume_result = resume_agent.run_interactive(
+    initial_output={
+        "skills": skills_result,
+        "advice": coach_result
+    }
+)
+# Print resume output
+print("\nResume:")
+print(json.dumps(resume_result, ensure_ascii=False, indent=2))
+
+# Step 8: Run Cover Letter Agent.
+cover_letter_result = cover_letter_agent.run_interactive(
+    initial_output={
+        "resume": resume_result
+    }
+)
+# Print cover letter output
+print("\nFinal Cover Letter:")
+print(json.dumps(cover_letter_result, ensure_ascii=False, indent=2))
