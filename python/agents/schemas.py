@@ -9,3 +9,10 @@ skills_schema = {
     "confidence": float,
     "evidence": list
 }
+coach_schema = {
+    "career_summary": str,
+    "career_paths": list,
+    "strengths_identified": list,
+    "development_areas": list,
+    "additional_guidance": str
+}
