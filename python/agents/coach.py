@@ -85,22 +85,13 @@ Return at least 2 career_paths.
 Each why_it_fits must contain at least 2 items.
 Each recommended_next_steps must contain at least 2 items.
 
-End off with:
-Handing off to Resume Agent for creating resume.
-
 Important Note While Returning JSON:
 1. Return ONLY valid JSON, and must be constructed with double-quotes; Double quotes within strings must be escaped with a backslash.
 2. No explanation.
 3. Follow schema strictly.
         """
-        # raw = call_llm(self.system_prompt, prompt, "json_object")
-        # parsed = json.loads(raw)
-        # self._validate(parsed)
-        # return parsed
-        result_str = call_llm(coach_system_prompt, prompt, "text")
-        try:
-            result_json = json.loads(result_str)
-        except json.JSONDecodeError:
-            result_json = {"career_summary": "JSONDecodeError", "career_paths": [], "strengths_identified": [], "development_areas": [], "additional_guidance": ""}
-        return result_json
+        raw = call_llm(self.system_prompt, prompt, "json_object")
+        parsed = json.loads(raw)
+        self._validate(parsed)
+        return parsed
         
