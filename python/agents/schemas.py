@@ -8,9 +8,9 @@ cover_letter_schema = {
     "cover_letter": str
 }
 skills_schema = {
-    "skill": str,
-    "confidence": float,
-    "evidence": list
+    "experiences": list,
+    "education": list,
+    "inferred_skills": list
 }
 coach_schema = {
     "career_summary": str,

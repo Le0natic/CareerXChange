@@ -301,11 +301,8 @@ Clear, concise, and professionally formatted
 
 You may be given:
 
-Candidate details (education, experience, skills, projects)
-Target job role or job description
-Seniority level (entry-level, mid, senior)
-Industry or company preferences
-Existing resume (for rewriting/improvement)
+Skills (includes educational qualifications, job experience and other skills)
+Advice (includes career guidance)
 
 Writing Rules
 Use strong action verbs (e.g., “Led”, “Optimized”, “Built”, “Reduced”).
