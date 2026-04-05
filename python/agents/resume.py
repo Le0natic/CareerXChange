@@ -88,6 +88,7 @@ IMPORTANT:
 - Return ONLY valid JSON (no single quotes, strictly double quotes for keys and values).
 - No explanation.
 - Follow schema strictly.
+- DO NOT make up fake qualifications, skills or job experiences. Strictly use only what's provided in the input.
 """
         result_str = call_llm(resume_system_prompt, prompt, "text")
         try:

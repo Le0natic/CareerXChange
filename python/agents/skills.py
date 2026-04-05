@@ -153,9 +153,9 @@ Instructions:
 {{
     "experiences": [ "...", "..."],
     "education": [ "...", "..."],
-    "inferred skills":[ "...", "..."]
+    "inferred_skills":[ "...", "..."]
 }}
-5. Only include relevant items. Avoid explanations.
+5. Only include relevant items. Avoid explanations. Strictly follow the schema.
 """
             result_str = call_llm(skills_system_prompt, prompt, "text")
             try:
