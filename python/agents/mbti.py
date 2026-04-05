@@ -1,6 +1,8 @@
+import random
+
 from shared.llm_client import call_llm
 from agents.base.agent import Agent
-from agents.prompts import mbti_system_prompt, mbti_questions
+from agents.prompts import mbti_system_prompt
 from agents.schemas import mbti_schema
 import json
 
@@ -18,8 +20,8 @@ class MBTIAgent(Agent):
         answers = []
         count = 1
 
-        # Step 1: Generate questions.
-        questions = self.generate_questions(context, question_count)
+        # Step 1: Select questions from bank.
+        questions = self.select_questions(self.question_bank, total_questions=20)
 
         print(f"\n[{self.name}] Got it! Please answer the following {len(questions)} questions.")
 
@@ -57,42 +59,93 @@ class MBTIAgent(Agent):
                 "traits": [],
                 "message": f"Only {len(answers)} out of {len(questions)} questions answered. Cannot determine MBTI type."
             }
-
-    # Step 2: Ask questions.
-    def generate_questions(self, context, question_count):
-        print(f"Requesting {question_count} questions from {self.name}...")
-        prompt = f"""
-        Based on your knowledge as an agent detailed in {self.system_prompt}:
-        {context}
-
-        Ask EXACTLY any {question_count} questions from the question list below:
-        {mbti_questions}
-
-        Important Note While Asking Questions:
-        1. Only ask the questions provided, word-by-word: Do not deviate from these questions.
-        2. Do not repeat questions already asked.
-        3. Do not show any hint or information regarding what the question is asking about. This is to not lead the user to answer a certain way if they already know their MBTI. 
-        4. Do not provide any information of 'Si/Se' or 'Ni/Ne' or 'Fi/Fe' or 'Ti/Te' in the questions prompted to the user.
-        5. There must be 2 choices (labelled with A and B arranged vertically) for each question.
-        6. Must cover at least ONE question from each of 3 categories.
-
-        Return JSON in following format:
-        {{
-            "questions": [
-                "...", 
-                "..."
-            ]
-        }}
-
-        Important Note While Returning JSON:
-        1. Return ONLY valid JSON, and must be constructed with double-quotes; Double quotes within strings must be escaped with a backslash.
-        2. No explanation.
-        3. Follow schema strictly.
-        """
-        raw = call_llm(self.system_prompt, prompt, "json_object")
-        data = json.loads(raw)
-        return data["questions"]
     
+    question_bank = {
+        "Dichotomical": [
+            # ENERGY — E/I
+            "After a busy week, which feels more refreshing? \nA. Alone with one person \nB. Going out socially",
+            "When solving a problem, what do you naturally do first? \nA. Think privately \nB. Talk it out",
+            "In a group discussion, you usually: \nA. Observe and speak when meaningful \nB. Jump in easily",
+            "After social interaction you usually feel: \nA. Drained \nB. Energized",
+
+            # INFORMATION — S/N
+            "When learning something new, which helps more? \nA. Concrete examples \nB. Big-picture concepts",
+            "Which do you notice more naturally? \nA. Details now \nB. Patterns/possibilities",
+            "When approaching a new idea, you tend to: \nA. Ask 'How does this work?' \nB. Ask 'What could this lead to?'",
+            "When reading a story or film, you focus more on: \nA. Events/details \nB. Themes/symbolism",
+
+            # DECISION STYLE — T/F
+            "When making an important decision, you prioritize: \nA. Logic \nB. Impact on people",
+            "When giving feedback, your instinct is: \nA. Be direct \nB. Phrase carefully",
+            "In disagreements, you focus first on: \nA. What is logically correct \nB. Maintaining understanding",
+            "Fairness usually means: \nA. Same rules for all \nB. Considering circumstances",
+
+            # STRUCTURE — J/P
+            "When planning a trip you prefer to: \nA. Organize itinerary \nB. Decide spontaneously",
+            "How do deadlines affect you? \nA. Finish early \nB. Work best near deadline",
+            "Your workspace or schedule is usually: \nA. Organized \nB. Flexible",
+            "When starting a project you prefer: \nA. Define plan first \nB. Experiment along the way"
+        ],
+        "Targeted Cluster": [
+            # Ni vs Ne
+            "When thinking about the future, do you: \nA. Focus on one vision \nB. Generate many possibilities",
+            "When brainstorming ideas you prefer: \nA. Develop one deeply \nB. Explore many rapidly",
+
+            # Si vs Se
+            "When solving problems, you rely more on: \nA. Past experience \nB. Immediate observation",
+            "Your attention naturally goes to: \nA. What worked before \nB. What is happening now",
+
+            # Ti vs Te
+            "When analyzing something you prefer: \nA. Understand internal logic \nB. Make system efficient",
+            "When something is inefficient you: \nA. Reevaluate logic \nB. Reorganize processes",
+
+            # Fi vs Fe
+            "When making moral decisions you rely more on: \nA. Personal values \nB. Group harmony",
+            "When someone is upset you usually: \nA. Respect their emotions \nB. Restore harmony"
+        ],
+        "Pair Differentiation": [
+            # INTJ vs INTP
+            "Do you prefer: \nA. Structured long-term strategies \nB. Exploring theories without plan",
+
+            # INFJ vs INFP
+            "When your values are challenged you: \nA. Guide others \nB. Reflect internally",
+
+            # ENTJ vs ESTJ
+            "In leadership you focus more on: \nA. Strategic transformation \nB. Enforcing systems",
+
+            # ISTJ vs ISFJ
+            "When rules conflict with someone's situation you: \nA. Maintain rules \nB. Protect people",
+
+            # ENFP vs ENTP
+            "When exploring ideas you focus more on: \nA. Meaning/values \nB. Logical possibilities",
+
+            # ISFP vs ISTP
+            "When approaching a problem you rely more on: \nA. Personal values \nB. Technical logic"
+        ]
+    }
+
+    def select_questions(self, question_bank, total_questions=20):
+        """
+        Returns a Python list of selected questions (ready to loop over),
+        balanced across categories.
+        """
+        categories = list(question_bank.keys())
+        selected_questions = []
+
+        # Determine number of questions per category
+        base_count = total_questions // len(categories)
+        remainder = total_questions % len(categories)
+        category_counts = {cat: base_count + (1 if i < remainder else 0) for i, cat in enumerate(categories)}
+
+        # Pick questions
+        for cat, count in category_counts.items():
+            if count > len(question_bank[cat]):
+                raise ValueError(f"Not enough questions in category {cat} to pick {count}")
+            selected_questions.extend(random.sample(question_bank[cat], count))
+
+        random.shuffle(selected_questions)
+        return selected_questions
+
     # Step 3: Final classification.
     def finalize_questionnaire(self, context, answers):
         prompt = f"""
