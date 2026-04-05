@@ -91,11 +91,11 @@ class SkillsAgent(Agent):
             input_text += "Education History:\n" + "\n".join(education) + "\n"
 
         # If there is no input at all, return insufficient evidence
-        if not input_text.strip():
-            return {
-                "identified_soft_skills": [],
-                "message": "Insufficient evidence to infer soft skills"
-            }
+        # if not input_text.strip():
+        #     return {
+        #         "identified_soft_skills": [],
+        #         "message": "Insufficient evidence to infer soft skills"
+        #     }
 
         # --- Call the LLM ---
         prompt = f"""
@@ -107,10 +107,12 @@ User Input:
 
 Instructions:
 Return results in JSON. Limit results to the most relevant 5 to 12 skills.
-If there is insufficient information, return:
+If there is insufficient information, leave inferred_skills blank.
+Return JSON with the following format:
 {{
-"identified_soft_skills": [],
-"message": "Insufficient evidence to infer soft skills"
+    "experiences": [ "...", "..."],
+    "education": [ "...", "..."],
+    "inferred_skills":[ "...", "..."]
 }}
 """
         result_json_str = call_llm(
@@ -123,13 +125,14 @@ If there is insufficient information, return:
             result_json = json.loads(result_json_str)
         except json.JSONDecodeError:
             result_json = {
-                "identified_soft_skills": [],
-                "message": "Insufficient evidence to infer soft skills"
+                "experiences": ["JSONDecodeError"],
+                "education": [],
+                "inferred_skills":[]
             }
 
         # Limit to 12 skills max
-        if "identified_soft_skills" in result_json:
-            result_json["identified_soft_skills"] = result_json["identified_soft_skills"][:12]
+        if "inferred_skills" in result_json:
+            result_json["inferred_skills"] = result_json["inferred_skills"][:12]
         return result_json
     
     def process_resume(self, resume_text):
