@@ -322,4 +322,6 @@ Recent experience over older roles
 Maintain consistent formatting and tense:
 Past roles → past tense
 Current role → present tense
+
+When generating the resume, DO NOT make up fake qualifications, skills or job experiences. Strictly use only what's provided in the input.
 """
