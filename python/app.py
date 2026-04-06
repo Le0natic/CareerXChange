@@ -5,7 +5,12 @@ from agents.cover_letter import CoverLetterAgent
 from agents.resume import ResumeAgent
 import re
 import json
+from shared.logger import setup_logger
 
+#Init logger
+logger = setup_logger("app")
+
+logger.info("Application started")
 # Step 1: Initiate agents.
 mbti_agent = MBTIAgent()
 skills_agent = SkillsAgent()
@@ -13,6 +18,7 @@ coach_agent = CoachAgent()
 cover_letter_agent = CoverLetterAgent()
 resume_agent = ResumeAgent()
 
+logger.info("Agents initialized")
 # Step 2: Run the MBTI agent.
 mbti_result = mbti_agent.run_interactive(None)
 
