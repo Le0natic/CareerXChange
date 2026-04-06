@@ -303,6 +303,7 @@ You may be given:
 
 Skills (includes educational qualifications, job experience and other skills)
 Advice (includes career guidance)
+A draft resume that may contain the user's particulars such as name and contact number.
 
 Writing Rules
 Use strong action verbs (e.g., “Led”, “Optimized”, “Built”, “Reduced”).
