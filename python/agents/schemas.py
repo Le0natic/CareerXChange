@@ -10,7 +10,8 @@ cover_letter_schema = {
 skills_schema = {
     "experiences": list,
     "education": list,
-    "inferred_skills": list
+    "inferred_skills": list,
+    "existing_resume": str
 }
 coach_schema = {
     "career_summary": str,
