@@ -74,11 +74,11 @@ class SkillsAgent(Agent):
         else:
             print(f"\n[{self.name}] No resume provided. Proceeding with current data...")
 
-        return self.process_profile(context, experiences, education)
+        return self.process_profile(context, experiences, education, resume_text)
      
         
     # Step 2: Generating user profile.
-    def process_profile(self, context, experiences, education):
+    def process_profile(self, context, experiences, education, resume_text):
         """
         Step 3: Extract soft skills based on user input using the imported skills_system_prompt.
         Returns JSON in the required format.
@@ -105,14 +105,19 @@ System Prompt:
 User Input:
 {input_text}
 
+Resume:
+{resume_text}
+
 Instructions:
 Return results in JSON. Limit results to the most relevant 5 to 12 skills.
 If there is insufficient information, leave inferred_skills blank.
+If there is resume text provided, return it as is.
 Return JSON with the following format:
 {{
     "experiences": [ "...", "..."],
     "education": [ "...", "..."],
-    "inferred_skills":[ "...", "..."]
+    "inferred_skills":[ "...", "..."],
+    "existing_resume": ""
 }}
 """
         result_json_str = call_llm(
@@ -127,7 +132,8 @@ Return JSON with the following format:
             result_json = {
                 "experiences": ["JSONDecodeError"],
                 "education": [],
-                "inferred_skills":[]
+                "inferred_skills":[],
+                "existing_resume":""
             }
 
         # Limit to 12 skills max
@@ -156,7 +162,7 @@ Instructions:
 {{
     "experiences": [ "...", "..."],
     "education": [ "...", "..."],
-    "inferred_skills":[ "...", "..."]
+    "inferred_skills":[ "...", "..."],
 }}
 5. Only include relevant items. Avoid explanations. Strictly follow the schema.
 """
