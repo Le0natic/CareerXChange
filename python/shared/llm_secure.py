@@ -26,7 +26,7 @@ def call_llm_secure(system_prompt: str, user_input: str) -> str:
     if is_malicious_input(user_input):
         return "Blocked malicious input"
 
-    response = call_llm(system_prompt, user_input)
+    response = call_llm(system_prompt, user_input,"text")
 
     if is_unsafe_output(response):
         return "Blocked unsafe output"
