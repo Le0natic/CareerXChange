@@ -17,6 +17,7 @@ Install the following in case you are wondering what is missing in your system:
 * Docker Desktop (optional but recommended)
 
 Please create an OpenAI API key before proceeding (https://platform.openai.com/).
+Please create an account at https://developer.ssg-wsg.gov.sg/webapp/home and create an app to obtain the CLIENT_ID and CLIENT_SECRET
 
 ---
 
@@ -62,6 +63,8 @@ Create `.env` in the root:
 
 ```
 OPENAI_API_KEY=your_api_key_here
+CLIENT_ID=your_ssg_client_id_here
+CLIENT_SECRET=your_ssg_client_secret_here
 ```
 
 Create `.gitignore`:
@@ -169,7 +172,7 @@ Activate:
 ### 5.2 Install dependencies
 
 ```bash
-pip install openai python-dotenv
+pip install openai python-dotenv requests
 pip freeze > requirements.txt
 ```
 
